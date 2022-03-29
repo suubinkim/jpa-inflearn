@@ -1,6 +1,8 @@
 package hellojpa;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor //기본생성자
+@RequiredArgsConstructor //생성자
 public class Member {
     @Id
     private Long id;
