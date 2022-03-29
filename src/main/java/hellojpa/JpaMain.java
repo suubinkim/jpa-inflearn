@@ -19,20 +19,18 @@ public class JpaMain {
         tx.begin();
 
         try {
+            //비영속
             Member member = new Member();
             member.setId(1L);
             member.setName("hello");
-            //멤버 저장
+
+            //멤버 저장 - 영속상태 (db저장이 아닌 영속성 컨텍스트에 저장)
             em.persist(member);
 
-            //멤버 수정
-            Member member1 = em.find(Member.class, 1L);
-            member1.setName("bye");
+            //영속성 컨텍스트에서 분리
+            em.detach(member);
 
-            //멤버 삭제
-            em.remove(member1);
-
-            //트랜잭션 커밋 ( 끝 )
+            //트랜잭션 커밋 ( 끝 ) 이때 쿼리가 날라가면서 db에 저장됨
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
